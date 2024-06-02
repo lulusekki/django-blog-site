@@ -13,3 +13,9 @@ class BlogListView(ListView):
     template_name = 'blog/blog_list.html'
     model = Blog
     queryset = Blog.objects.all()
+       
+    #ここから下を追加
+    def get_context_data(self, **kwargs):
+        context = super(BlogListView, self).get_context_data(**kwargs)
+        context['category_list'] = Category.objects.all()
+        return context

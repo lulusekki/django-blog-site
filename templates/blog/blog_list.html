@@ -1,5 +1,4 @@
-{% extends './base.html' %}
-{% block contents %}
+{% extends './base.html' %} {% block contents %}
 <!-- wrap始まり -->
 <div id="wrap" class="clearfix">
   <div class="content">
@@ -24,6 +23,7 @@
       {% endfor %}
       <!-- ここまで記事一覧-->
     </div>
+    {% include 'blog/widgets/side_category.html' %}
     <!-- end main -->
   </div>
   <!-- end content-->
