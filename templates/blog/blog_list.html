@@ -17,7 +17,13 @@
             </a>
             <div class="title"><b>{{ item.category }}</b></div>
           </li>
-          <p>{{ item.content }}</p>
+          <p>
+            {{ item.content |linebreaksbr | truncatechars:100 }}<a
+              href="{% url 'blog:detail' item.pk %}"
+              target="_blank"
+              >続きを見る ≫</a
+            >
+          </p>
         </ul>
       </section>
       {% endfor %}
