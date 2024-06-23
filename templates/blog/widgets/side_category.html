@@ -2,7 +2,13 @@
   <h2>Category</h2>
   <ul>
     {% for category in category_list %}
-    <li>{{ category.category_name }}</li>
+    <!--ここから下を修正-->
+    <li>
+      <a href="{% url 'blog:category' category.category_name %}"
+        >{{category.category_name}}</a
+      >
+    </li>
+    <!--ここまでを修正-->
     {% endfor %}
   </ul>
 </aside>
