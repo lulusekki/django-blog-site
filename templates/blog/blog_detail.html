@@ -33,7 +33,7 @@
             <td><p class="btn-edit"><a href="{% url 'blog:edit' object.pk %}">編集</a></td>
           </td>
           <td>
-            <p class="btn-delete"><a href="">削除</a></p>
+            <p class="btn-delete"><a href="{% url 'blog:delete' object.pk %}">削除</a></p>
           </td>
         </tr>
       </table>
