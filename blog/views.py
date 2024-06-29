@@ -4,6 +4,7 @@ from django.views.generic import ListView, DetailView, CreateView, DeleteView, U
 from .models import Blog, Category
 from . forms import BlogForm
 from django.urls import reverse_lazy
+from django.db.models import Q
 
 def index(request):
     return render(request, 'blog/index.html')
@@ -95,3 +96,33 @@ class CategoryView(ListView):
        context = super(CategoryView, self).get_context_data(**kwargs)
        context['category_list'] = Category.objects.all()
        return context
+
+
+class SearchPostView(ListView):
+    model = Blog
+    template_name = 'blog/blog_list.html'
+    
+    def get_queryset(self):
+        """
+        request.GETには GET リクエストのパラメータが含まれています。
+        request.GET.get('q', None)でqパラメータの値を取得し、値が
+        存在しない場合はNoneを取得します。
+        """
+        query = self.request.GET.get('q', None)
+       
+        if query is not None:
+            qs = Blog.objects.filter(Q(title__icontains=query) | 
+                 Q(category__category_name__icontains=query))
+            return qs
+
+        else:
+            qs = Blog.objects.all()
+            return qs
+
+
+    def get_context_data(self, *args, **kwargs):
+        """クリックされたカテゴリを保持"""
+        #context = super().get_context_data(*args, **kwargs)
+        context = super(SearchPostView, self).get_context_data(**kwargs)
+        context['category_list'] = Category.objects.all()
+        return context
