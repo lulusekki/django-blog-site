@@ -4,6 +4,13 @@
   <div class="content">
     <div class="main">
       <h1>記事一覧</h1>
+      <!-- ここから下を追加-->
+      <form class="form-inline my-2 my-lg-0" action="{% url 'blog:search_list' %}" method="GET" >
+        <!--送信先に渡すnameとvalueを指定-->
+        <input class="form-control mr-sm-2" type="search" name="q" value="{{ request.GET.q }}" placeholder="Search" aria-label="Search" />
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit"> 検索 </button>
+      </form>
+      <!-- ここまでを追加-->
       <!-- ここから記事一覧-->
       {% for item in object_list %}
       <section>
